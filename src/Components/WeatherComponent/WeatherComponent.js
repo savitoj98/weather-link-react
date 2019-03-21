@@ -31,7 +31,7 @@ const getCurrentWeather = (location, apiKey) => {
 
             })
             .catch(e => {
-                reject(e)
+                // reject(e)
                 console.log(e)
             })
     })
@@ -62,7 +62,7 @@ const getForecastWeather = (location,apiKey) => {
                 });
             })
             .catch(e => {
-                reject(e)
+                // reject(e)
                 console.log(e)
             })
     })
@@ -98,7 +98,11 @@ const getPastWeather = (location,apiKey) => {
 
                 })
                 .catch(e => {
-                    reject(e)
+                    // reject(e)
+                    past_data.push({"date":dateStamp})
+                    if (past_data.length > 6) {
+                        resolve(past_data)
+                    }
                     console.log(e)
                 })
         }   
@@ -125,13 +129,14 @@ class WeatherComponent extends Component {
             
             //Get Current Weather
             let currentWeather = await getCurrentWeather(this.props.location, this.props.apiKey)
-            
+                // .catch(error => currentWeather = {})
             //Get Forecast Weather    
             let forecastWeather = await getForecastWeather(this.props.location, this.props.apiKey)
-        
+                // .catch (error => forecastWeather = [])
             //Get Past Weather
             let pastWeather = await getPastWeather(this.props.location, this.props.apiKey)
-             
+                // .catch(error => pastWeather=[])
+
             this.setState({
                 forecast: forecastWeather,
                 past: pastWeather,
