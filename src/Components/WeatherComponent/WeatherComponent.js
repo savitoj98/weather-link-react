@@ -8,7 +8,7 @@ import axios from 'axios';
 
 const getCurrentWeather = (location, apiKey) => {
     return new Promise((resolve,reject) => {
-        axios.get(`http://api.apixu.com/v1/current.json?key=${apiKey}&q=${location.coords.lat},${location.coords.long}`)
+        axios.get(`https://api.apixu.com/v1/current.json?key=${apiKey}&q=${location.coords.lat},${location.coords.long}`)
             .then(res => {
                 res = res.data
                 let current_data = {
@@ -39,7 +39,7 @@ const getCurrentWeather = (location, apiKey) => {
 
 const getForecastWeather = (location,apiKey) => {
     return new Promise((resolve, reject) => {
-        axios.get(`http://api.apixu.com/v1/forecast.json?key=${apiKey}&q=${location.coords.lat},${location.coords.long}&days=5`)
+        axios.get(`https://api.apixu.com/v1/forecast.json?key=${apiKey}&q=${location.coords.lat},${location.coords.long}&days=5`)
             .then(res => {
                 let forecastArray = res.data.forecast.forecastday
                 let forecast_data = []
@@ -77,7 +77,7 @@ const getPastWeather = (location,apiKey) => {
 
             let dateStampFormated = (dateStamp.getFullYear()) + "-" + (dateStamp.getMonth() + 1) + "-" + (dateStamp.getDate())
 
-            axios.get(`http://api.apixu.com/v1/history.json?key=${apiKey}&q=${location.coords.lat},${location.coords.long}&dt=${dateStampFormated}`)
+            axios.get(`https://api.apixu.com/v1/history.json?key=${apiKey}&q=${location.coords.lat},${location.coords.long}&dt=${dateStampFormated}`)
                 .then(res => {
                     let elem = res.data.forecast.forecastday[0]
 
